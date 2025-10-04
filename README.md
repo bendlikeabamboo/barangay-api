@@ -32,7 +32,7 @@ Once successful, run using uvicorn:
 uvicorn barangay_api.main:app --port 48573
 ```
 
-Try out the API in your local browser: `http://localhost:48573`
+Try out the API in your local browser: `http://localhost:48573/docs`
 
 ### Using Docker
 Build the image
@@ -44,7 +44,7 @@ Run the image
 ```
 docker run -p 48573:48573 barangay-api
 ```
-Try out the API in your local browser: `http://localhost:48573`
+Try out the API in your local browser: `http://localhost:48573/docs`
 
 ## License
 
