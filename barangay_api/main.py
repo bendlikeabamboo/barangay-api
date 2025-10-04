@@ -26,8 +26,8 @@ class SearchBarangayRequest(BaseModel):
 
 class Barangay(BaseModel):
     barangay: str
-    province_or_huc: str
-    municipality_or_city: str
+    province_or_huc: str | None = None
+    municipality_or_city: str | None = None
     psgc_id: str
 
 
