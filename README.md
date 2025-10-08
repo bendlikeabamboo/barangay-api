@@ -1,13 +1,13 @@
-# barangay-api
+# 🏃‍➡️ barangay-api
 Barangay API - Simple FastAPI wrapper for [barangay](https://pypi.org/project/barangay/)
 package.
 
-## Overview
+## 🗺️ Overview
 
 This project is a FastAPI wrapper around the barangay package, providing a simple and
 efficient way to interact with the Philippine Standard Geographic Code (PSGC) data.
 
-## Features
+## 🔦 Features
 
 - Simple and easy to use API.
 - Performant barangay fuzzy-search function - can reach **sub-20ms per match**, minus
@@ -15,20 +15,18 @@ efficient way to interact with the Philippine Standard Geographic Code (PSGC) da
 - FastAPI framework for high performance, auto-documentation, and validation.
 - Docker-ready
 
-## Usage
+## 📦 Installation & Usage
 
-## Installation & Usage
-
-### Easiest: Using Linux Docker Image
+### 🐋 Easiest: Using Linux Docker Image
 **Use this when:** you have docker and using linux (even WSL):
 
 ```
 docker run -p 48573:48573 -d bendlikeabamboo/barangay-api
 ```
 
-Try out the API in your local browser: `http://localhost:48573/docs`
+Try out the API in your local browser: [`http://localhost:48573/docs`](http://localhost:48573/docs)
 
-### Building Docker Image From Source
+### 🐳 Building Docker Image From Source
 
 **Use this when:** you're on other platforms but have docker installed.
 
@@ -48,10 +46,10 @@ Run the image
 ```
 docker run -p 48573:48573 barangay-api
 ```
-Try out the API in your local browser: `http://localhost:48573/docs`
+Try out the API in your local browser: [`http://localhost:48573/docs`](http://localhost:48573/docs)
 
 
-### Using Python
+### 🐍 Using Python From Source
 
 **Use this when:** you don't have docker but have Python >3.12 installed or would like
 to develop & contribute.
@@ -74,7 +72,7 @@ Once successful, run using uvicorn:
 uvicorn barangay_api.main:app --port 48573
 ```
 
-Try out the API in your local browser: `http://localhost:48573/docs`
+Try out the API in your local browser: [`http://localhost:48573/docs`](http://localhost:48573/docs)
 
 ## License
 
