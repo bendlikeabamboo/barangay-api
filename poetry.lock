@@ -34,14 +34,14 @@ trio = ["trio (>=0.31.0)"]
 
 [[package]]
 name = "barangay"
-version = "2025.8.29.1"
+version = "2025.10.13.0"
 description = "Philippines Standard Geographic Code (PSGC) 2025 Python package, Fuzzy Search, JSON, and YAML."
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "barangay-2025.8.29.1-py3-none-any.whl", hash = "sha256:9909923e41d6b00f9fa403a8e9899078b8cd60fd66ac127dfa6e66f385b5c8d6"},
-    {file = "barangay-2025.8.29.1.tar.gz", hash = "sha256:2138d7486968d6f97d7cf814108c34bf4fd11f1b90943f7b72626cd1bb18d7cc"},
+    {file = "barangay-2025.10.13.0-py3-none-any.whl", hash = "sha256:6ff17ebb7bcb3b30bc709b4890a3b16ca155315955c8984bb912f0b1d02603f2"},
+    {file = "barangay-2025.10.13.0.tar.gz", hash = "sha256:7708ade738e09f84c6af163bd85065b5b6d213e3804f93c3dfb9d819b70bfe40"},
 ]
 
 [package.dependencies]
