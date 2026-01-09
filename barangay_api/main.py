@@ -7,11 +7,12 @@ from typing import Any, Dict, List, Literal
 
 from barangay import BARANGAY, BARANGAY_FLAT, search
 from fastapi import APIRouter, FastAPI, HTTPException
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
 administrative_area_by_id = {area["psgc_id"]: area for area in BARANGAY_FLAT}
 
-app = FastAPI(title="Barangay API")
+app = FastAPI(title="Barangay API", version="1.0.0")
 search_router = APIRouter(tags=["Search"])
 forms_router = APIRouter(tags=["Forms"])
 psgc_router = APIRouter(tags=["Philippine Standard Geographic Code"])
@@ -76,6 +77,10 @@ def _check_id(id: str):
             detail=f"No such id: '{id}'. Are you using the 10-digit PSGC format?",
         )
 
+
+@app.get("/")
+def root() -> RedirectResponse:
+    return RedirectResponse(url="/docs")
 
 @search_router.post("/search_barangay")
 async def search_barangay(

@@ -2,18 +2,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install Poetry
-RUN pip install --no-cache-dir poetry
-
-# Copy only requirements to cache dependencies
-COPY pyproject.toml poetry.lock ./
-
 # Copy application code
 COPY . .
 
 # Install dependencies
-RUN poetry config virtualenvs.create false \
-    && poetry install --no-interaction --no-ansi --only main
+RUN pip install .
 
 # Expose obscure port
 EXPOSE 48573
