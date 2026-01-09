@@ -78,7 +78,7 @@ def _check_id(id: str):
         )
 
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 def root() -> RedirectResponse:
     return RedirectResponse(url="/docs")
 
