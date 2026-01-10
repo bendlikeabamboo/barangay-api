@@ -82,6 +82,7 @@ def _check_id(id: str):
 def root() -> RedirectResponse:
     return RedirectResponse(url="/docs")
 
+
 @search_router.post("/search_barangay")
 async def search_barangay(
     search_request: SearchBarangayRequest,
