@@ -92,7 +92,7 @@ psgc_router = APIRouter(tags=["Philippine Standard Geographic Code (PSGC)"])
 class SearchBarangayRequest(BaseModel):
     search_string: str
     match_hooks: List[Literal["province", "municipality", "barangay"]] | None = Field(
-        default=["barangay", "municipality"]
+        default=["barangay", "municipality", "province"]
     )
     threshold: float | None = 60
     len_results: int | None = 1
