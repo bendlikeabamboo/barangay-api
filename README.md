@@ -74,6 +74,10 @@ uvicorn barangay_api.main:app --port 48573
 
 Try out the API in your local browser: [`http://localhost:48573/docs`](http://localhost:48573/docs)
 
+## Code of Conduct
+
+We are committed to fostering a welcoming and inclusive community. Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
