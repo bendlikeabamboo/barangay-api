@@ -3,24 +3,97 @@ Main file for the Barangay API.
 """
 
 import time
+import os
 from typing import Any, Dict, List, Literal
 
 from barangay import BARANGAY, BARANGAY_FLAT, search
+from dotenv import load_dotenv
 from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import RedirectResponse
-from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel, Field
+from scalar_fastapi import Layout, Theme, get_scalar_api_reference
 
-administrative_area_by_id = {area["psgc_id"]: area for area in BARANGAY_FLAT}
+# Loading dotenv
+load_dotenv()
 
-app = FastAPI(title="Barangay API", version="1.0.0")
+# Building FastAPI application descriptions
+desc_none = ""
+desc_standard = """
+A simple API for searching and retrieving information about barangays in the 
+Philippines.
+
+- **Source code**: [Barangay-API GitHub](https://github.com/bendlikeabamboo/barangay-api)
+- **Docker image**: [Barangay-API v1.1.0](https://hub.docker.com/r/bendlikeabamboo/barangay-api)
+- **Philippines Standard Geographic Code PSGC Reference:** [October 13, 2025 Release](https://psa.gov.ph/classification/psgc/node/1684080966)
+- **Barangay Package PyPI:** [![PyPI version](https://badge.fury.io/py/barangay.svg)](https://badge.fury.io/py/barangay)
+- **Barangay Package Source Code:** [Barangay GitHub](https://github.com/bendlikeabamboo/barangay)
+"""
+desc_official_deployment = """
+Try it out in live in the official deployment: 
+- [Barangay-API (Scalar)](https://barangay-api.hawitsu.xyz/scalar)
+- [Barangay-API (SwaggerUI)](https://barangay-api.hawitsu.xyz/docs)
+- [Barangay-API (Redoc)](https://barangay-api.hawitsu.xyz/redoc)
+"""
+desc = (
+    (desc_none)
+    + (
+        desc_standard
+        if str(os.getenv("DESC_STANDARD", True)).lower() in ("true", "t", "1")
+        else ""
+    )
+    + (
+        desc_official_deployment
+        if str(os.getenv("DESC_OFFICIAL_DEPLOYMENT", False)).lower()
+        in ("true", "t", "1")
+        else ""
+    )
+)
+
+# Initializing application
+app = FastAPI(
+    title="Barangay API",
+    description=desc,
+    license_info={"name": "MIT", "url": "https://opensource.org/licenses/MIT"},
+    version="1.1.0",
+    openapi_tags=[
+        {
+            "name": "Search",
+            "description": " Friendly, quick fuzzy search for barangays."
+            " Use these endpoints when you want a fast, easy way to find a barangay"
+            " even if the name isn't typed exactly right.",
+        },
+        {
+            "name": "Forms",
+            "description": "Simple, hierarchical lookup of Philippine places."
+            " These endpoints return the next level in the hierarchy—regions,"
+            " provinces, cities/municipalities, and barangays. You can drill down"
+            " from one level to the next regardless of how the hierarchy is"
+            " structured. Ideal for drop-down forms.",
+        },
+        {
+            "name": "Philippine Standard Geographic Code (PSGC)",
+            "description": "Quick access to PSGC information. "
+            "These routes return the official PSGC identifiers and their associated"
+            " data for any Philippine locality.",
+        },
+    ],
+)
+# Adding mounts
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Adding routers
 search_router = APIRouter(tags=["Search"])
 forms_router = APIRouter(tags=["Forms"])
-psgc_router = APIRouter(tags=["Philippine Standard Geographic Code"])
+psgc_router = APIRouter(tags=["Philippine Standard Geographic Code (PSGC)"])
 
 
+# Defining RequestForms (for data validation)
 class SearchBarangayRequest(BaseModel):
     search_string: str
-    match_hooks: List[Literal["barangay", "municipality", "province"]] | None = None
+    match_hooks: List[Literal["province", "municipality", "barangay"]] | None = Field(
+        default=["barangay", "municipality"]
+    )
     threshold: float | None = 60
     len_results: int | None = 1
 
@@ -35,6 +108,10 @@ class Barangay(BaseModel):
 class SearchBarangayResult(BaseModel):
     results: List[Barangay]
     elapsed_seconds: float
+
+
+# Helper functions
+administrative_area_by_id = {area["psgc_id"]: area for area in BARANGAY_FLAT}
 
 
 def _check_region(region: str):
@@ -78,9 +155,22 @@ def _check_id(id: str):
         )
 
 
+# RestAPI
+@app.get("/scalar", include_in_schema=False)
+async def scalar_classic_html():
+    return get_scalar_api_reference(
+        openapi_url=app.openapi_url,
+        title="Barangay API",
+        layout=Layout.MODERN,
+        dark_mode=True,
+        theme=Theme.DEEP_SPACE,
+        scalar_favicon_url="/static/favicon.ico",
+    )
+
+
 @app.get("/", include_in_schema=False)
-def root() -> RedirectResponse:
-    return RedirectResponse(url="/docs")
+async def root() -> RedirectResponse:
+    return RedirectResponse(url="/scalar/")
 
 
 @search_router.post("/search_barangay")
@@ -204,6 +294,7 @@ async def get_administrative_area_by_name(name: str) -> List[Dict[str, Any]]:
     return res
 
 
+# Finally, mounting routers to application
 app.include_router(search_router)
 app.include_router(forms_router)
 app.include_router(psgc_router)
