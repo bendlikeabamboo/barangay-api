@@ -24,8 +24,8 @@ A simple API for searching and retrieving information about barangays in the
 Philippines.
 
 - **Source code**: [Barangay-API GitHub](https://github.com/bendlikeabamboo/barangay-api)
-- **Docker image**: [Barangay-API v1.1.0](https://hub.docker.com/r/bendlikeabamboo/barangay-api)
-- **Philippines Standard Geographic Code PSGC Reference:** [October 13, 2025 Release](https://psa.gov.ph/classification/psgc/node/1684080966)
+- **Docker image**: [Barangay-API v2026.1.13.0](https://hub.docker.com/r/bendlikeabamboo/barangay-api)
+- **Philippines Standard Geographic Code PSGC Reference:** [January 13, 2026 Release](https://psa.gov.ph/classification/psgc/node/1684082306)
 - **Barangay Package PyPI:** [![PyPI version](https://badge.fury.io/py/barangay.svg)](https://badge.fury.io/py/barangay)
 - **Barangay Package Source Code:** [Barangay GitHub](https://github.com/bendlikeabamboo/barangay)
 """
@@ -55,7 +55,7 @@ app = FastAPI(
     title="Barangay API",
     description=desc,
     license_info={"name": "MIT", "url": "https://opensource.org/licenses/MIT"},
-    version="1.1.0",
+    version="2026.1.13.0",
     openapi_tags=[
         {
             "name": "Search",
