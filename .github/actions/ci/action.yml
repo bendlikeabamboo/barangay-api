@@ -1,0 +1,25 @@
+name: CI
+description: Run lint, type check, and security audit
+
+runs:
+  using: composite
+  steps:
+    - name: Install dependencies
+      shell: bash
+      run: uv sync --frozen
+
+    - name: Ruff lint
+      shell: bash
+      run: uv run ruff check .
+
+    - name: Ruff format check
+      shell: bash
+      run: uv run ruff format --check .
+
+    - name: Mypy
+      shell: bash
+      run: uv run mypy .
+
+    - name: pip-audit
+      shell: bash
+      run: uv run pip-audit --desc on --format json
