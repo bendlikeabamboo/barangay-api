@@ -99,7 +99,7 @@ wheels = [
 
 [[package]]
 name = "barangay-api"
-version = "2026.1.13.0"
+version = "2026.4.13.0"
 source = { editable = "." }
 dependencies = [
     { name = "barangay" },
