@@ -3,7 +3,7 @@ name: Build, Push to Docker Hub + GHCR, and Deploy (Production)
 on:
   push:
     tags:
-      - '[0-9][0-9][0-9][0-9].[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9][0-9][0-9][0-9].[0-9]+.[0-9]+.[0-9]+'
 
 env:
   DOCKERHUB_IMAGE: docker.io/bendlikeabamboo/barangay-api
