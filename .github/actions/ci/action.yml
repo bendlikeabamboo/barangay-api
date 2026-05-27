@@ -6,7 +6,7 @@ runs:
   steps:
     - name: Install dependencies
       shell: bash
-      run: uv sync --frozen
+      run: uv sync --all-groups --frozen
 
     - name: Ruff lint
       shell: bash
