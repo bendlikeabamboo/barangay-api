@@ -3,17 +3,23 @@ name = "barangay-api"
 version = "2026.1.13.0"
 description = "FastAPI Wrapper for barangay"
 authors = [{ name = "bendlikeabamboo", email = "mbalmeo32@gmail.com" }]
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 readme = "README.md"
 license = { text = "MIT" }
 dependencies = [
     "fastapi>=0.118.0,<1.0.0",
-    "barangay>=2025.7.31.0,<9999.0.0.0",
+    "barangay>=2026.4.13.0",
     "uvicorn (>=0.37.0,<0.38.0)",
     "pydantic (>=2.11.9,<3.0.0)",
-    "starlette>=0.48.0",
+    "starlette>=1.0.1",
     "scalar-fastapi>=1.6.0",
     "python-dotenv>=1.2.1",
+    "idna>=3.15",
+    "pip>=26.1",
+    "pygments>=2.20.0",
+    "pyparsing>=2.33.0",
+    "urllib3>=2.7.0",
+    "requests>=2.33.0",
 ]
 
 [build-system]
@@ -21,6 +27,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [dependency-groups]
+dev = [
+    "mypy>=2.1.0",
+    "ruff>=0.15.14",
+    "types-setuptools>=82.0.0.20260518",
+]
 sec = [
     "pip-audit>=2.10.0",
 ]

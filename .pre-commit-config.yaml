@@ -1,21 +1,23 @@
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.9
+  - repo: local
     hooks:
       - id: ruff
-        args: [--fix, --exit-non-zero-on-fix]
+        name: ruff
+        entry: uv run ruff check --fix --exit-non-zero-on-fix
+        language: system
         types: [python]
       - id: ruff-format
+        name: ruff-format
+        entry: uv run ruff format
+        language: system
         types: [python]
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.2
-    hooks:
       - id: mypy
-        additional_dependencies: [types-setuptools]
+        name: mypy
+        entry: uv run mypy
+        language: system
         types: [python]
-  - repo: https://github.com/pypa/pip-audit
-    rev: v2.7.3
-    hooks:
       - id: pip-audit
-        args: [--desc, "on", --format, json]
-        files: ^(requirements.*\.txt|pyproject\.toml|uv\.lock)$
+        name: pip-audit
+        entry: uv run pip-audit --desc on --format json
+        language: system
+        pass_filenames: false
