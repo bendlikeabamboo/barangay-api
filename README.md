@@ -9,11 +9,15 @@ efficient way to interact with the Philippine Standard Geographic Code (PSGC) da
 
 ## 🔦 Features
 
-- Simple and easy to use API.
+- Simple and easy to use API (OpenAPI Specification 3.1.0 -  RestAPI).
 - Performant barangay fuzzy-search function - can reach **sub-20ms per match**, minus
   network delays. That's roughly 1.1 million match/second!
+- Access to historical PSGC data.
 - FastAPI framework for high performance, auto-documentation, and validation.
 - Docker-ready
+
+## 🌐 Live Deployment
+[Barangay API](https://barangay-api.hawitsu.xyz/) (no promises on reliability 😅)
 
 ## 📦 Installation & Usage
 
@@ -51,7 +55,7 @@ Try out the API in your local browser: [`http://localhost:48573/docs`](http://lo
 
 ### 🐍 Using Python From Source
 
-**Use this when:** you don't have docker but have Python >3.12 installed or would like
+**Use this when:** you don't have docker but have Python >3.13 installed or would like
 to develop & contribute.
 
 To get started, clone the repository.
